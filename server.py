@@ -45,5 +45,15 @@ def predict():
 
     return jsonify(prediction)
 
+from flask import send_from_directory
+
+@app.route('/')
+def serve_home():
+    return send_from_directory('.', 'ai-detector-frontend.html')  # يخلي الواجهة تظهر مباشرة لما العميل يفتح اللينك
+
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('.', path)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
